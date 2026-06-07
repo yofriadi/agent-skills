@@ -20,6 +20,19 @@ See [agents/README.md](agents/README.md) for the decision matrix and [references
 
 **Antigravity interop:** the personas in `agents/` work as specialized agent personas (referenced when requesting reviews or audits).
 
+## Repository Scope
+
+This repository is **vendor-neutral**. It targets coding agents as a class (Antigravity, etc.) and avoids coupling to any single host's distribution format.
+
+**Out of scope by design:**
+
+- **Claude Code** — no `.claude-plugin/marketplace.json`, no `agents/commands/<name>.md` mirrored to `.claude/commands/`, no Claude-specific slash command surface. Skills, personas, and commands under `agents/commands/` are the canonical form.
+- **Other host-specific marketplaces** (Cursor, Windsurf, Gemini CLI, OpenCode) — no per-host plugin metadata. Any host integration notes live in `docs/` as prose, not as config the host consumes.
+
+**Why:** skills and personas are reused across multiple agent hosts. Hosting them under one vendor's marketplace directory makes the tree misleading for every other host and turns a structural choice into a tribal one. The contents are portable; the directory layout should reflect that.
+
+If a future host needs its own metadata, add it as a sibling (e.g. `.cursor-plugin/`) and keep `agents/` as the source of truth.
+
 ## Creating a New Skill
 
 ### Directory Structure
