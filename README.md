@@ -75,7 +75,7 @@ The commands above are entry points. The pack includes 23 skills total — 22 li
 | Skill | What It Does | Use When |
 |-------|-------------|----------|
 | [technical-discovery-and-research](skills/technical-discovery-and-research/SKILL.md) | Deep codebase exploration, documentation analysis, and constraint mapping | Grounding understanding of existing codebases, external APIs, and dependencies |
-| [technical-spike](skills/technical-spike/SKILL.md) | Time-boxed, experimental coding to validate technical feasibility, test APIs, or explore architectural options | Technical risks or unknowns are high |
+| [technical-spike](skills/technical-spike/SKILL.md) | Experimental coding to validate technical feasibility, test APIs, or explore architectural options | Technical risks or unknowns are high |
 | [interview-me](skills/interview-me/SKILL.md) | One-question-at-a-time interview that extracts what the user actually wants instead of what they think they should want, until ~95% confidence | The ask is underspecified, or the user invokes "interview me" / "grill me" |
 | [idea-refine](skills/idea-refine/SKILL.md) | Structured divergent/convergent thinking to turn vague ideas into concrete proposals | You have a rough concept that needs exploration |
 | [spec-driven-development](skills/spec-driven-development/SKILL.md) | Write a PRD covering objectives, commands, structure, code style, testing, and boundaries before any code | Starting a new project, feature, or significant change |

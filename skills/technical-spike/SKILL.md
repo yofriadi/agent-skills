@@ -1,13 +1,13 @@
 ---
 name: technical-spike
-description: Performs time-boxed, experimental coding (Spikes) to validate technical feasibility, test APIs, or explore architectural ideas. Use before writing a spec or plan when technical risks or unknowns are high.
+description: Performs experimental coding (Spikes) to validate technical feasibility, test APIs, or explore architectural ideas. Use before writing a spec or plan when technical risks or unknowns are high.
 ---
 
 # Technical Spike
 
 ## Overview
 
-A "Spike" is a time-boxed, experimental coding session to validate technical feasibility, test new APIs, or explore complex architectural ideas. Spikes are designed to gather knowledge and reduce risk. **The code written during a spike is throwaway—it must not be committed to the main production branch.**
+A "Spike" is an experimental coding session to validate technical feasibility, test new APIs, or explore complex architectural ideas. Spikes are designed to gather knowledge and reduce risk. **The code written during a spike is experimental—it must not be committed to the main production branch, but should be saved under `docs/spikes/` for future reference.**
 
 ## When to Use
 
@@ -26,21 +26,17 @@ A spike follows a tight, risk-reducing loop:
 DEFINE GOAL ──→ EXPERIMENT ──→ RUN & EVALUATE ──→ DOCUMENT & CLEAN UP
      │              │                │                   │
      ▼              ▼                ▼                   ▼
- Timebox and    Draft messy       Execute and        Record findings,
- target risk    sandbox code     observe behavior    discard code
+ Define goal    Draft messy       Execute and        Record findings,
+ and risks      sandbox code     observe behavior    archive code
 ```
 
-### Step 1: Define Goal and Timebox
+### Step 1: Define Goal
 
-Define exactly what question the spike needs to answer (e.g., "Can we fetch data from API X and serialize it using Zod?"). Keep the scope minimal and the timebox tight (e.g., 15-30 minutes).
+Define exactly what question the spike needs to answer (e.g., "Can we fetch data from API X and serialize it using Zod?"). Keep the scope minimal and focused.
 
 ### Step 2: Implement Sandbox Code
 
 Write draft code to test the goal.
-
-- Prioritize speed and learning over code quality.
-- Ignore linters, test requirements, or formatting rules.
-- Do not make load-bearing changes to existing production files.
 
 ### Step 3: Run and Observe
 
@@ -49,10 +45,10 @@ Execute the spike code and capture the output:
 - Monitor logs, console errors, and database changes.
 - Verify performance or memory usage if that is the goal.
 
-### Step 4: Document Findings and Discard Code
+### Step 4: Document Findings and Save Spike Code
 
-Save your findings (lessons learned, configuration gotchas, successful code snippets) in `SPIKE_FINDINGS.md` in the project root (or under the `docs/` folder as `docs/SPIKE_FINDINGS.md`, or a descriptive name under `docs/spikes/` if conducting multiple spikes).
-**Critically: Discard all spike code changes.** Do not commit draft spike code directly to production; rewrite the solution cleanly in the subsequent `/build` phase.
+Save your findings (lessons learned, configuration gotchas, successful code snippets) in the `docs/spikes/` folder (e.g., as a Markdown file with a descriptive name, or a subfolder containing the findings and code).
+**Critically: Move all spike code and findings to `docs/spikes/` for future reference, as they serve as documentation.** Rewrite the solution cleanly in the subsequent `/build` phase.
 
 **Spike Template:**
 
@@ -95,5 +91,5 @@ Save your findings (lessons learned, configuration gotchas, successful code snip
 
 Before completing a spike, confirm:
 - [ ] The core question has been answered (yes or no).
-- [ ] Findings and working patterns are documented in `SPIKE_FINDINGS.md` (or in the `docs/` folder).
-- [ ] All draft code changes have been discarded or isolated.
+- [ ] Findings and working patterns are documented in the `docs/spikes/` folder.
+- [ ] All spike code changes have been moved to `docs/spikes/` or isolated.
