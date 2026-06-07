@@ -35,11 +35,13 @@ Skills also activate automatically based on what you're doing — designing an A
 If your agent supports native skill discovery, point it to the `skills/` directory at the root of the workspace.
 
 **Install from repository:**
+
 ```bash
 antigravity skills install https://github.com/addyosmani/agent-skills.git --path skills
 ```
 
 **Install from local clone:**
+
 ```bash
 antigravity skills install ./agent-skills/skills/
 ```
@@ -55,7 +57,6 @@ cat skills/code-review-and-quality/SKILL.md >> AGENTS.md
 ```
 
 For more details, see [docs/getting-started.md](docs/getting-started.md).
-
 
 ---
 
@@ -154,7 +155,7 @@ Quick-reference material that skills pull in when needed:
 
 Every skill follows a consistent anatomy:
 
-```
+```text
 ┌─────────────────────────────────────────────────┐
 │  SKILL.md                                       │
 │                                                 │
@@ -183,7 +184,7 @@ Every skill follows a consistent anatomy:
 
 ## Project Structure
 
-```
+```text
 agent-skills/
 ├── .agents/                           # Antigravity CLI workspace directory
 │   └── skills/                        # 25 skills (24 lifecycle + 1 meta)

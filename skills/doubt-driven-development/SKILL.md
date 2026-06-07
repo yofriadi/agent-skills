@@ -44,13 +44,13 @@ If you doubt every keystroke, you ship nothing. The skill applies only to non-tr
 This skill is designed for the **main-session orchestrator**, where Step 3 (DOUBT, detailed below) can spawn a fresh-context reviewer.
 
 - **Do NOT add this skill to a persona's `skills:` frontmatter.** A persona that follows Step 3 would spawn another persona — the orchestration anti-pattern explicitly forbidden by `references/orchestration-patterns.md` ("personas do not invoke other personas").
-    - **If you find yourself applying this skill from inside a subagent context** (where the harness prevents nested subagent spawn): the preferred path is to surface to the user that doubt-driven cannot run nested and let the main session handle it. As a last resort only, a degraded self-questioning fallback exists — rewrite ARTIFACT + CONTRACT as a fresh self-prompt with a hard mental separator from your prior reasoning, and walk Steps 1–5. This is **not fresh-context review** (you carry your own context with you), so flag the result as degraded and prefer escalation whenever the user is reachable.
+  - **If you find yourself applying this skill from inside a subagent context** (where the harness prevents nested subagent spawn): the preferred path is to surface to the user that doubt-driven cannot run nested and let the main session handle it. As a last resort only, a degraded self-questioning fallback exists — rewrite ARTIFACT + CONTRACT as a fresh self-prompt with a hard mental separator from your prior reasoning, and walk Steps 1–5. This is **not fresh-context review** (you carry your own context with you), so flag the result as degraded and prefer escalation whenever the user is reachable.
 
 ## The Process
 
 Copy this checklist when applying the skill:
 
-```
+```text
 Doubt cycle:
 - [ ] Step 1: CLAIM — wrote the claim + why-it-matters
 - [ ] Step 2: EXTRACT — isolated artifact + contract, stripped reasoning
@@ -63,7 +63,7 @@ Doubt cycle:
 
 Name the decision in two or three lines:
 
-```
+```text
 CLAIM: "The new caching layer is thread-safe under the
         read-heavy workload described in the spec."
 WHY THIS MATTERS: a race here corrupts user data and is
@@ -86,7 +86,7 @@ Strip your reasoning. If you hand over conclusions, you'll get back validation o
 
 The reviewer's prompt **must be adversarial**. Framing decides the answer.
 
-```
+```text
 Adversarial review. Find what is wrong with this artifact.
 Assume the author is overconfident. Look for:
 - Unstated assumptions
@@ -115,7 +115,7 @@ A single-model reviewer shares blind spots with the original author — a colder
 
 **Interactive sessions: always offer. Never silently skip.**
 
-**Step 1: Ask the user**
+## Step 1: Ask the user
 
 After the single-model review in Step 3 above, but before RECONCILE, pause and ask:
 
@@ -123,7 +123,7 @@ After the single-model review in Step 3 above, but before RECONCILE, pause and a
 
 This question is mandatory in every interactive doubt cycle — even on artifacts that feel low-stakes. The user — not the agent — decides whether the cost is worth it. The agent's job is to surface the choice.
 
-**Step 2: If the user picks a CLI — verify, then invoke**
+## Step 2: If the user picks a CLI — verify, then invoke
 
 1. Check the tool is in PATH (`which antigravity`, `which codex`).
 2. Test it works (`antigravity --version` or equivalent) before passing the full prompt — a stale or broken binary may pass `which` but fail on real input.
@@ -150,11 +150,11 @@ antigravity --approval-mode plan -p "" < /tmp/doubt-prompt.md
 
 A read-only sandbox is the load-bearing detail: a doubt artifact may itself contain instructions (intentional or accidental prompt injection) that the cross-model CLI would otherwise execute against your workspace.
 
-**Step 3: If the CLI is unavailable or fails**
+## Step 3: If the CLI is unavailable or fails
 
 Surface the failure explicitly. Offer: run it manually, try a different tool, or skip. Do not silently fall back to single-model — the user should know cross-model didn't happen.
 
-**Step 4: If the user skips**
+## Step 4: If the user skips
 
 Acknowledge the skip in the output (*"Proceeding with single-model findings only"*) and continue to RECONCILE. Skipping is fine; silent skipping is not.
 

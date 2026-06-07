@@ -12,13 +12,14 @@ The governing rule: **the user (or a slash command) is the orchestrator. Persona
 
 Single persona, single perspective, single artifact. The default and the cheapest option.
 
-```
+```text
 user → code-reviewer → report → user
 ```
 
 **Use when:** the work is one perspective on one artifact and you can describe it in one sentence.
 
 **Examples:**
+
 - "Review this PR" → `code-reviewer`
 - "Find security issues in `auth.ts`" → `security-auditor`
 - "What tests are missing for the checkout flow?" → `test-engineer`
@@ -31,7 +32,7 @@ user → code-reviewer → report → user
 
 A slash command that wraps one persona with the project's skills. Saves the user from re-explaining the workflow every time.
 
-```
+```text
 /review → code-reviewer (with code-review-and-quality skill) → report
 ```
 
@@ -49,13 +50,14 @@ A slash command that wraps one persona with the project's skills. Saves the user
 
 Multiple personas operate on the same input concurrently, each producing an independent report. A merge step (in the main agent's context) synthesizes them into a single decision.
 
-```
+```text
                     ┌─→ code-reviewer    ─┐
 /ship → fan out  ───┼─→ security-auditor ─┤→ merge → go/no-go + rollback
                     └─→ test-engineer    ─┘
 ```
 
 **Use when:**
+
 - The sub-tasks are genuinely independent (no shared mutable state, no ordering dependency)
 - Each sub-agent benefits from its own context window
 - The merge step is small enough to stay in the main context
@@ -66,6 +68,7 @@ Multiple personas operate on the same input concurrently, each producing an inde
 **Cost:** N parallel sub-agent contexts + one merge turn. Higher than direct invocation, but faster wall-clock and produces better reports because each sub-agent stays focused on its single perspective.
 
 **Validation checklist before adopting this pattern:**
+
 - [ ] Can I run all sub-agents at the same time without ordering issues?
 - [ ] Does each persona produce a different *kind* of finding, not just the same finding from a different angle?
 - [ ] Will the merge step fit in the main agent's remaining context?
@@ -79,7 +82,7 @@ If any answer is "no," fall back to direct invocation or a single-persona comman
 
 The user runs slash commands in a defined order, carrying context (or commit history) between them. There is no orchestrator agent — the user IS the orchestrator.
 
-```
+```text
 user runs:  /spec  →  /plan  →  /build  →  /test  →  /review  →  /ship
 ```
 
@@ -97,11 +100,12 @@ user runs:  /spec  →  /plan  →  /build  →  /test  →  /review  →  /ship
 
 When a task requires reading large amounts of material that shouldn't pollute the main context, spawn a research sub-agent that returns only a digest.
 
-```
+```text
 main agent → research sub-agent (reads 50 files) → digest → main agent continues
 ```
 
 **Use when:**
+
 - The main session needs to stay focused on a downstream task
 - The investigation result is much smaller than the input it consumes
 - The decision quality benefits from the main agent having room to think after
@@ -114,18 +118,18 @@ main agent → research sub-agent (reads 50 files) → digest → main agent con
 
 ---
 
-
 ## Anti-patterns
 
 ### A. Router persona ("meta-orchestrator")
 
 A persona whose job is to decide which other persona to call.
 
-```
+```text
 /work → router-persona → "this needs a review" → code-reviewer → router (paraphrases) → user
 ```
 
 **Why it fails:**
+
 - Pure routing layer with no domain value
 - Adds two paraphrasing hops → information loss + roughly 2× token cost
 - The user already knew they wanted a review; they could have called `/review` directly
@@ -140,6 +144,7 @@ A persona whose job is to decide which other persona to call.
 A `code-reviewer` that internally invokes `security-auditor` when it sees auth code.
 
 **Why it fails:**
+
 - Personas were designed to produce a single perspective; chaining them defeats that
 - The summary the calling persona passes loses context the called persona needs
 - Failure modes multiply (which persona's output format wins? whose rules apply?)
@@ -154,6 +159,7 @@ A `code-reviewer` that internally invokes `security-auditor` when it sees auth c
 An agent that calls `/spec`, then `/plan`, then `/build`, etc. on the user's behalf.
 
 **Why it fails:**
+
 - Loses the human checkpoints that catch wrong-direction work
 - Each hand-off summarizes context — accumulated drift over a long pipeline
 - Doubles token cost: orchestrator turn + sub-agent turn for every step
@@ -168,6 +174,7 @@ An agent that calls `/spec`, then `/plan`, then `/build`, etc. on the user's beh
 `/ship` calls a `pre-ship-coordinator` that calls a `quality-coordinator` that calls `code-reviewer`.
 
 **Why it fails:**
+
 - Each layer adds latency and tokens with no decision value
 - Debugging becomes a multi-level investigation
 - The leaf personas lose context to multiple summarization steps
@@ -180,7 +187,7 @@ An agent that calls `/spec`, then `/plan`, then `/build`, etc. on the user's beh
 
 When considering a new orchestrated workflow, walk this flow:
 
-```
+```text
 Is the work one perspective on one artifact?
 ├── Yes → Direct invocation. Stop.
 └── No  → Will the same composition repeat?

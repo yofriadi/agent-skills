@@ -6,9 +6,9 @@ This is a worked instance of `port` research — a concrete, non-trivial port to
 
 ## Grounded Codebase Context (Remote)
 
-Paths below reference the source repository at https://github.com/earendil-works/pi, not a local working copy. Use these anchors as the grounding standard for `path:line` references in the actual `RESEARCH.md` deliverable.
+Paths below reference the source repository at <https://github.com/earendil-works/pi>, not a local working copy. Use these anchors as the grounding standard for `path:line` references in the actual `RESEARCH.md` deliverable.
 
-- **Repository:** https://github.com/earendil-works/pi
+- **Repository:** <https://github.com/earendil-works/pi>
 - **Primary language:** TypeScript (~94% of codebase)
 - **Architecture:** monorepo, 4 packages
   - `pi-ai` — provider-agnostic LLM interface (the provider trait surface)
@@ -22,7 +22,6 @@ Paths below reference the source repository at https://github.com/earendil-works
 - `pi-ai/src/provider.ts:12` — `Provider` interface (the trait surface to preserve as `pi_ai::Provider` in Rust; defines the LLM provider contract)
 - `pi-agent-core/src/agent.ts:45` — `Agent` loop state and executor lifecycle (the core orchestration primitive; source of the `&mut self` chain friction in Rust)
 - `pi-coding-agent/src/cli.ts:1` — CLI flag surface and entry point (drives the `clap` derive mapping and the deprecation-shim scope)
-
 - **Database / Schema (SQLite context cache):**
   - Table `conversations` (`id` TEXT PRIMARY KEY, `summary` TEXT, `created_at` INTEGER)
   - Table `messages` (`id` TEXT PRIMARY KEY, `conversation_id` TEXT REFERENCES conversations, `role` TEXT, `content` TEXT)
@@ -70,7 +69,7 @@ For each Pi package, the research must list every shared mutable value and pick 
 
 The port must preserve security verification and development lifecycle speeds:
 
-- **Linting & Formatting:** 
+- **Linting & Formatting:**
   - Source: `eslint-plugin-security` blocks unsafe dynamic imports and dynamic regex evaluation.
   - Target: Map to `cargo clippy` and `cargo-deny` configuration targeting unsafe blocks and dynamic regex dependencies (`regex` crate compilation audits).
 - **CI/CD Cache Optimization:**
@@ -126,5 +125,6 @@ The stop-early milestone is the right place for the user to validate the approac
 ## Handoff
 
 Once the user accepts the stop-early milestone (Phase 1 + provider conformance test suite), the research hands off to:
+
 1. `/spike` for the provider-trait surface (1-2 day time-boxed experiment with `async-openai` and Anthropic reimplementation)
 2. Then `/spec` for the full system, citing this `RESEARCH.md` as the discovery input

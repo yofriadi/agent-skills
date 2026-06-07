@@ -17,6 +17,7 @@ Pass the corresponding specialist agent type name:
 3. **`test-engineer`** — Analyze test coverage for the change. Identify gaps in happy path, edge cases, error paths, and concurrency scenarios. Output the standard coverage analysis.
 
 Constraints:
+
 - Subagents cannot spawn other subagents — do not let one persona delegate to another.
 - Each subagent gets its own context window and returns only its report to this main session.
 

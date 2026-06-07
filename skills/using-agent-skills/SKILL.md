@@ -13,7 +13,7 @@ Agent Skills is a collection of engineering workflow skills organized by develop
 
 When a task arrives, identify the development phase and apply the corresponding skill:
 
-```
+```text
 Task arrives
     │
     ├── Don't know what you want yet? ──────→ interview-me
@@ -48,7 +48,7 @@ These behaviors apply at all times, across all skills. They are non-negotiable.
 
 Before implementing anything non-trivial, explicitly state your assumptions:
 
-```
+```text
 ASSUMPTIONS I'M MAKING:
 1. [assumption about requirements]
 2. [assumption about architecture]
@@ -86,6 +86,7 @@ Sycophancy is a failure mode. "Of course!" followed by implementing a bad idea h
 Your natural tendency is to overcomplicate. Actively resist it.
 
 Before finishing any implementation, ask:
+
 - Can this be done in fewer lines?
 - Are these abstractions earning their complexity?
 - Would a staff engineer look at this and say "why didn't you just..."?
@@ -97,6 +98,7 @@ If you build 1000 lines and 100 would suffice, you have failed. Prefer the borin
 Touch only what you're asked to touch.
 
 Do NOT:
+
 - Remove comments you don't understand
 - "Clean up" code orthogonal to the task
 - Refactor adjacent systems as a side effect
@@ -138,7 +140,7 @@ These are the subtle errors that look like productivity but create problems:
 
 For a complete feature, the typical skill sequence is:
 
-```
+```text
 1.  interview-me                → Extract what the user actually wants
 2.  idea-refine                 → Refine vague ideas
 3.  spec-driven-development     → Define what we're building

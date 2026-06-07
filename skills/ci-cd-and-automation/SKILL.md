@@ -25,7 +25,7 @@ Automate quality gates so that no change reaches production without passing test
 
 Every change goes through these gates before merge:
 
-```
+```text
 Pull Request Opened
     │
     ▼
@@ -165,7 +165,7 @@ jobs:
 
 The power of CI with AI agents is the feedback loop. When CI fails:
 
-```
+```text
 CI fails
     │
     ▼
@@ -183,7 +183,7 @@ Agent fixes → pushes → CI runs again
 
 **Key patterns:**
 
-```
+```text
 Lint failure → Agent runs `npm run lint --fix` and commits
 Type error  → Agent reads the error location and fixes the type
 Test failure → Agent follows debugging-and-error-recovery skill
@@ -228,7 +228,7 @@ return renderLegacyCheckout();
 
 ### Staged Rollouts
 
-```
+```text
 PR merged to main
     │
     ▼
@@ -270,7 +270,7 @@ jobs:
 
 ## Environment Management
 
-```
+```text
 .env.example       → Committed (template for developers)
 .env                → NOT committed (local development)
 .env.test           → Committed (test environment, no real secrets)
@@ -310,7 +310,7 @@ Designate someone responsible for keeping CI green. When the build breaks, the B
 
 When the pipeline exceeds 10 minutes, apply these strategies in order of impact:
 
-```
+```text
 Slow CI pipeline?
 ├── Cache dependencies
 │   └── Use actions/cache or setup-node cache option for node_modules
@@ -326,7 +326,8 @@ Slow CI pipeline?
     └── GitHub-hosted larger runners or self-hosted for CPU-heavy builds
 ```
 
-**Example: caching and parallelism**
+## Example: caching and parallelism
+
 ```yaml
 jobs:
   lint:

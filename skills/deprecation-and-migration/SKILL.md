@@ -38,7 +38,7 @@ When building something new, ask: "How would we remove this in 3 years?" Systems
 
 Before deprecating anything, answer these questions:
 
-```
+```text
 1. Does this system still provide unique value?
    → If yes, maintain it. If no, proceed.
 
@@ -95,7 +95,7 @@ Don't deprecate without a working alternative. The replacement must:
 
 Migrate consumers one at a time, not all at once. For each consumer:
 
-```
+```text
 1. Identify all touchpoints with the deprecated system
 2. Update to use the replacement
 3. Verify behavior matches (tests, integration checks)
@@ -109,7 +109,7 @@ Migrate consumers one at a time, not all at once. For each consumer:
 
 Only after all consumers have migrated:
 
-```
+```text
 1. Verify zero active usage (metrics, logs, dependency analysis)
 2. Remove the code
 3. Remove associated tests, documentation, and configuration
@@ -123,7 +123,7 @@ Only after all consumers have migrated:
 
 Run old and new systems in parallel. Route traffic incrementally from old to new. When the old system handles 0% of traffic, remove it.
 
-```
+```text
 Phase 1: New system handles 0%, old handles 100%
 Phase 2: New system handles 10% (canary)
 Phase 3: New system handles 50%

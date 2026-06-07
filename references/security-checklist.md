@@ -53,7 +53,7 @@ Quick reference for web application security. Use alongside the `security-and-ha
 
 ## Security Headers
 
-```
+```text
 Content-Security-Policy: default-src 'self'; script-src 'self'
 Strict-Transport-Security: max-age=31536000; includeSubDomains
 X-Content-Type-Options: nosniff

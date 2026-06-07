@@ -23,7 +23,7 @@ Write a structured specification before writing any code. The spec is the shared
 
 Spec-driven development has four phases. Do not advance to the next phase until the current one is validated.
 
-```
+```text
 SPECIFY ──→ PLAN ──→ TASKS ──→ IMPLEMENT
    │          │        │          │
    ▼          ▼        ▼          ▼
@@ -37,7 +37,7 @@ Start with a high-level vision. Ask the human clarifying questions until require
 
 **Surface assumptions immediately.** Before writing any spec content, list what you're assuming:
 
-```
+```text
 ASSUMPTIONS I'M MAKING:
 1. This is a web application (not native mobile)
 2. Authentication uses session-based cookies (not JWT)
@@ -53,7 +53,8 @@ Don't silently fill in ambiguous requirements. The spec's entire purpose is to s
 1. **Objective** — What are we building and why? Who is the user? What does success look like?
 
 2. **Commands** — Full executable commands with flags, not just tool names.
-   ```
+
+   ```text
    Build: npm run build
    Test: npm test -- --coverage
    Lint: npm run lint --fix
@@ -61,7 +62,8 @@ Don't silently fill in ambiguous requirements. The spec's entire purpose is to s
    ```
 
 3. **Project Structure** — Where source code lives, where tests go, where docs belong.
-   ```
+
+   ```text
    src/           → Application source code
    src/components → React components
    src/lib        → Shared utilities
@@ -116,7 +118,7 @@ Don't silently fill in ambiguous requirements. The spec's entire purpose is to s
 
 **Reframe instructions as success criteria.** When receiving vague requirements, translate them into concrete conditions:
 
-```
+```text
 REQUIREMENT: "Make the dashboard faster"
 
 REFRAMED SUCCESS CRITERIA:
@@ -151,6 +153,7 @@ Break the plan into discrete, implementable tasks:
 - No task should require changing more than ~5 files
 
 **Task template:**
+
 ```markdown
 - [ ] Task: [Description]
   - Acceptance: [What must be true when done]

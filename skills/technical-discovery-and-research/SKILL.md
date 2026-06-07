@@ -39,6 +39,7 @@ Identify the research type first — it determines which sub-steps matter most:
 ## Scoping Questions
 
 Before searching, confirm with the user:
+
 1. **Research type** — which entry from the taxonomy above applies
 2. **Research target** — the feature, library, system, or port under investigation
 3. **Scope** — single file, module, package, or whole repo
@@ -55,7 +56,7 @@ Skip questions that are obviously answered. Capture answers in the deliverable.
 
 Technical discovery follows a systematic search-and-document process:
 
-```
+```text
 LOCATE SYMBOLS ──→ READ & ANALYZE ──→ VERIFY APIS ──→ DOCUMENT FINDINGS
        │                 │                │                 │
        ▼                 ▼                ▼                 ▼
@@ -120,6 +121,7 @@ Save the findings in `RESEARCH.md` in the project root, or `docs/research/<topic
 If this research extends an earlier stream, keep the earlier document immutable and add a new sibling document that links back to it. Follow-on research is not an append-only dumping ground; it must answer one narrower decision cleanly.
 
 Select the template based on the **Research Type Taxonomy**:
+
 - **Discovery Template (Default)**: For `feature`, simple `modification`, and routine `refactor`. Focuses on quick codebase mapping, blast radius, and identifying unknowns.
 - **Comprehensive Template**: For `port`, `integration`, `library-survey`, `follow-on`, `greenfield`, high-risk/stateful `modification`, and large/architectural `refactor`. Focuses on risk mitigation, translation, external contracts, and contract stability.
 
@@ -205,7 +207,6 @@ Select the template based on the **Research Type Taxonomy**:
 - **Open questions:** [unresolved architectural or product decisions for /plan]
 ```
 
-
 ### Next Steps
 
 1. **Technical Spike (`/spike`):** If there are high technical risks, integrations with unknown behavior, or architectural uncertainties documented in Step 4, proceed to `/spike` to experiment with sandbox code before planning.
@@ -238,6 +239,7 @@ Select the template based on the **Research Type Taxonomy**:
 Before declaring discovery complete, confirm:
 
 ### 1. General Gates (All research types)
+
 - [ ] Research type identified and scope documented
 - [ ] At least 3 relevant codebase files, reference projects, or documentation sources read and cited
 - [ ] Findings grounded in `path:line` anchors, cited external documentation, or concrete reference project analysis (as applicable)
@@ -245,12 +247,14 @@ Before declaring discovery complete, confirm:
 - [ ] Recommended next step (`/spike` or `/plan`) explicitly stated
 
 ### 2. Integration, Survey, and Follow-On Gates (For integrations / library surveys / follow-on streams)
+
 - [ ] External API structures, environment variables, authentication, and rate limits verified when relevant to the decision
 - [ ] Pinned library versions identified when the stream introduces dependency candidates; concrete usage examples from public code identified and referenced when available
 - [ ] Parent research and the specific decision this stream grounds are explicitly linked when this is a follow-on stream
 - [ ] Every dependency target license checked against target distribution constraints (no license contamination) — only when the stream introduces or replaces dependency candidates
 
 ### 3. Port & High-Risk Change Gates (For ports, stateful modifications, large refactors)
+
 - [ ] Behavioral-preservation contract documented (definition of preserved behavior and invariants)
 - [ ] Translation table covers every direct dependency and tools/CI parity (for `port`)
 - [ ] Source system thread-safety boundaries mapped to target concurrency primitives (for `port`)
@@ -258,9 +262,11 @@ Before declaring discovery complete, confirm:
 - [ ] Risk register with severity ratings present
 
 ### 4. High-Risk Integration Gates (For integrations with external services or libraries)
+
 - [ ] Risk register with severity ratings present
 
 ### 5. Greenfield Gates (For greenfield projects)
+
 - [ ] At least 2-3 reference projects/architectures documented
 - [ ] Chosen patterns are grounded in observed production usage
 

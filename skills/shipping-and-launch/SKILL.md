@@ -93,7 +93,7 @@ return null;
 
 **Feature flag lifecycle:**
 
-```
+```text
 1. DEPLOY with flag OFF     → Code is in production but inactive
 2. ENABLE for team/beta     → Internal testing in production environment
 3. GRADUAL ROLLOUT          → 5% → 25% → 50% → 100% of users
@@ -102,6 +102,7 @@ return null;
 ```
 
 **Rules:**
+
 - Every feature flag has an owner and an expiration date
 - Clean up flags within 2 weeks of full rollout
 - Don't nest feature flags (creates exponential combinations)
@@ -111,7 +112,7 @@ return null;
 
 ### The Rollout Sequence
 
-```
+```text
 1. DEPLOY to staging
    └── Full test suite in staging environment
    └── Manual smoke test of critical flows
@@ -153,6 +154,7 @@ Use these thresholds to decide whether to advance, hold, or roll back at each st
 ### When to Roll Back
 
 Roll back immediately if:
+
 - Error rate increases by more than 2x baseline
 - P95 latency increases by more than 50%
 - User-reported issues spike
@@ -163,7 +165,7 @@ Roll back immediately if:
 
 ### What to Monitor
 
-```
+```text
 Application metrics:
 ├── Error rate (total and by endpoint)
 ├── Response time (p50, p95, p99)
@@ -226,7 +228,7 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 
 In the first hour after launch:
 
-```
+```text
 1. Check health endpoint returns 200
 2. Check error monitoring dashboard (no new error types)
 3. Check latency dashboard (no regression)
@@ -263,6 +265,7 @@ Every deployment needs a rollback plan before it happens:
 - Redeploy previous version: < 5 minutes
 - Database rollback: < 15 minutes
 ```
+
 ## See Also
 
 - For security pre-launch checks, see `references/security-checklist.md`

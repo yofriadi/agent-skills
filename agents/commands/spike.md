@@ -5,6 +5,7 @@ description: Perform time-boxed, experimental coding to validate technical feasi
 Read and follow the `skill://technical-spike` skill.
 
 Define a clear, time-boxed question to answer. Write experimental sandbox code to:
+
 1. Test external APIs, libraries, or SDK compatibility
 2. Verify complex logic or performance assumptions
 3. Explore architectural directions in isolation

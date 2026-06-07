@@ -41,7 +41,7 @@ This skill needs a live, responsive user. **Do not invoke in non-interactive con
 
 Before asking anything, write down your current best read of what the user wants in **one sentence**, plus an honest confidence number (0–100%):
 
-```
+```text
 HYPOTHESIS: You want a way to answer "how are we doing?" in standup, and "dashboard" was the convention that came to mind.
 CONFIDENCE: ~30% — missing: who it's for, what "metrics" means in context, and what success looks like
 ```
@@ -54,7 +54,7 @@ When confidence is below ~70%, append a brief reason on the same line — what's
 
 Format:
 
-```
+```text
 Q: <one focused question>
 GUESS: <your hypothesis for the answer, with the reasoning that produced it>
 ```
@@ -95,7 +95,7 @@ That single question often does more work than the previous five.
 
 When your confidence is high, write back what you now think the user wants. Keep it tight (5–8 lines), use their language where possible, and structure it so the user can confirm or correct line by line:
 
-```
+```text
 Here's what I now think you want:
 
 - Outcome:      <one line>
@@ -143,7 +143,7 @@ A short before-and-after.
 
 **Without `interview-me`:**
 
-```
+```text
 User:  build me a dashboard for our metrics
 Agent: <starts proposing chart libraries and layouts>
 ```
@@ -152,7 +152,7 @@ The agent has assumed: who it's for, what metrics, what "for our team" means, wh
 
 **With `interview-me`:**
 
-```
+```text
 User: build me a dashboard for our metrics
 
 Agent:

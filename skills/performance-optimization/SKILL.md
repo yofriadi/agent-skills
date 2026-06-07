@@ -29,7 +29,7 @@ Measure before optimizing. Performance work without measurement is guessing — 
 
 ## The Optimization Workflow
 
-```
+```text
 1. MEASURE  → Establish baseline with real data
 2. IDENTIFY → Find the actual bottleneck (not assumed)
 3. FIX      → Address the specific bottleneck
@@ -45,6 +45,7 @@ Two complementary approaches — use both:
 - **RUM (web-vitals library, CrUX):** Real user data in real conditions. Required to validate that a fix actually improved user experience.
 
 **Frontend:**
+
 ```bash
 # Synthetic: Lighthouse in Chrome DevTools (or CI)
 # Chrome DevTools → Performance tab → Record
@@ -59,6 +60,7 @@ onCLS(console.log);
 ```
 
 **Backend:**
+
 ```bash
 # Response time logging
 # Application Performance Monitoring (APM)
@@ -74,7 +76,7 @@ console.timeEnd('db-query');
 
 Use the symptom to decide what to measure first:
 
-```
+```text
 What is slow?
 ├── First page load
 │   ├── Large bundle? --> Measure bundle size, check code splitting
@@ -293,7 +295,7 @@ res.set('Cache-Control', 'public, max-age=300'); // 5 minutes
 
 Set budgets and enforce them:
 
-```
+```text
 JavaScript bundle: < 200KB gzipped (initial load)
 CSS: < 50KB gzipped
 Images: < 200KB per image (above the fold)
@@ -304,6 +306,7 @@ Lighthouse Performance score: ≥ 90
 ```
 
 **Enforce in CI:**
+
 ```bash
 # Bundle size check
 npx bundlesize --config bundlesize.config.json
@@ -315,7 +318,6 @@ npx lhci autorun
 ## See Also
 
 For detailed performance checklists, optimization commands, and anti-pattern reference, see `references/performance-checklist.md`.
-
 
 ## Common Rationalizations
 

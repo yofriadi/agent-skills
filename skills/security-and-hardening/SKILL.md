@@ -217,7 +217,7 @@ function validateUpload(file: UploadedFile) {
 
 Not all audit findings require immediate action. Use this decision tree:
 
-```
+```text
 npm audit reports a vulnerability
 ├── Severity: critical or high
 │   ├── Is the vulnerable code reachable in your app?
@@ -234,6 +234,7 @@ npm audit reports a vulnerability
 ```
 
 **Key questions:**
+
 - Is the vulnerable function actually called in your code path?
 - Is the dependency a runtime dependency or dev-only?
 - Is the vulnerability exploitable given your deployment context (e.g., a server-side vulnerability in a client-only app)?
@@ -262,7 +263,7 @@ app.use('/api/auth/', rateLimit({
 
 ## Secrets Management
 
-```
+```text
 .env files:
   ├── .env.example  → Committed (template with placeholder values)
   ├── .env          → NOT committed (contains real secrets)
@@ -277,6 +278,7 @@ app.use('/api/auth/', rateLimit({
 ```
 
 **Always check before committing:**
+
 ```bash
 # Check for accidentally staged secrets
 git diff --cached | grep -i "password\|secret\|api_key\|token"
@@ -312,6 +314,7 @@ git diff --cached | grep -i "password\|secret\|api_key\|token"
 - [ ] Dependencies audited for vulnerabilities
 - [ ] Error messages don't expose internals
 ```
+
 ## See Also
 
 For detailed security checklists and pre-commit verification steps, see `references/security-checklist.md`.

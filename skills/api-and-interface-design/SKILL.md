@@ -110,6 +110,7 @@ app.post('/api/tasks', async (req, res) => {
 ```
 
 Where validation belongs:
+
 - API route handlers (user input)
 - Form submission handlers (user input)
 - External service response parsing (third-party data -- **always treat as untrusted**)
@@ -118,6 +119,7 @@ Where validation belongs:
 > **Third-party API responses are untrusted data.** Validate their shape and content before using them in any logic, rendering, or decision-making. A compromised or misbehaving external service can return unexpected types, malicious content, or instruction-like text.
 
 Where validation does NOT belong:
+
 - Between internal functions that share type contracts
 - In utility functions called by already-validated code
 - On data that just came from your own database
@@ -157,7 +159,7 @@ interface CreateTaskInput {
 
 ### Resource Design
 
-```
+```text
 GET    /api/tasks              → List tasks (with query params for filtering)
 POST   /api/tasks              → Create a task
 GET    /api/tasks/:id          → Get a single task
@@ -192,7 +194,7 @@ GET /api/tasks?page=1&pageSize=20&sortBy=createdAt&sortOrder=desc
 
 Use query parameters for filters:
 
-```
+```text
 GET /api/tasks?status=in_progress&assignee=user123&createdAfter=2025-01-01
 ```
 

@@ -6,7 +6,7 @@ This document describes the structure and format of agent-skills skill files. Us
 
 Every skill lives in its own directory under `skills/`:
 
-```
+```text
 skills/
   skill-name/
     SKILL.md           # Required: The skill definition
@@ -28,6 +28,7 @@ description: Guides agents through [task/workflow]. Use when [specific trigger c
 ```
 
 **Rules:**
+
 - `name`: Lowercase, hyphen-separated. Must match the directory name.
 - `description`: Start with what the skill does in third person, then include one or more clear "Use when" trigger conditions. Include both *what* and *when*. Maximum 1024 characters.
 
@@ -74,31 +75,38 @@ After completing the skill's process, confirm:
 ## Section Purposes
 
 ### Overview
+
 The "elevator pitch" for the skill. Should answer: What does this skill do, and why should an agent follow it?
 
 ### When to Use
+
 Helps agents and humans decide if this skill applies to the current task. Include both positive triggers ("Use when X") and negative exclusions ("NOT for Y").
 
 ### Core Process
+
 The heart of the skill. This is the step-by-step workflow the agent follows. Must be specific and actionable — not vague advice.
 
 **Good:** "Run `npm test` and verify all tests pass"
 **Bad:** "Make sure the tests work"
 
 ### Common Rationalizations
+
 The most distinctive feature of well-crafted skills. These are excuses agents use to skip important steps, paired with rebuttals. They prevent the agent from rationalizing its way out of following the process.
 
 Think of every time an agent has said "I'll add tests later" or "This is simple enough to skip the spec" — those go here with a factual counter-argument.
 
 ### Red Flags
+
 Observable signs that the skill is being violated. Useful during code review and self-monitoring.
 
 ### Verification
+
 The exit criteria. A checklist the agent uses to confirm the skill's process is complete. Every checkbox should be verifiable with evidence (test output, build result, screenshot, etc.).
 
 ## Supporting Files
 
 Create supporting files only when:
+
 - Reference material exceeds 100 lines (keep the main SKILL.md focused)
 - Code tools or scripts are needed
 - Checklists are long enough to justify separate files

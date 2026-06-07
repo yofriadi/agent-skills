@@ -82,7 +82,7 @@ Use PostgreSQL with Prisma ORM.
 
 ### ADR Lifecycle
 
-```
+```text
 PROPOSED → ACCEPTED → (SUPERSEDED or DEPRECATED)
 ```
 

@@ -23,7 +23,7 @@ Build production-quality user interfaces that are accessible, performant, and vi
 
 Colocate everything related to a component:
 
-```
+```text
 src/components/
   TaskList/
     TaskList.tsx          # Component implementation
@@ -102,7 +102,7 @@ export function TaskList({ tasks }: { tasks: Task[] }) {
 
 **Choose the simplest approach that works:**
 
-```
+```text
 Local state (useState)           → Component-specific UI state
 Lifted state                     → Shared between 2-3 sibling components
 Context                          → Theme, auth, locale (read-heavy, write-rare)
@@ -146,7 +146,7 @@ Use a consistent spacing scale. Don't invent values:
 
 Respect the type hierarchy:
 
-```
+```text
 h1 → Page title (one per page)
 h2 → Section title
 h3 → Subsection title

@@ -33,7 +33,7 @@ Simplify code by reducing complexity while preserving exact behavior. The goal i
 
 Don't change what the code does — only how it expresses it. All inputs, outputs, side effects, error behavior, and edge cases must remain identical. If you're not sure a simplification preserves behavior, don't make it.
 
-```
+```text
 ASK BEFORE EVERY CHANGE:
 → Does this produce the same output for every input?
 → Does this maintain the same error behavior?
@@ -45,7 +45,7 @@ ASK BEFORE EVERY CHANGE:
 
 Simplification means making code more consistent with the codebase, not imposing external preferences. Before simplifying:
 
-```
+```text
 1. Read CLAUDE.md / project conventions
 2. Study how neighboring code handles similar patterns
 3. Match the project's style for:
@@ -108,7 +108,7 @@ Default to simplifying recently modified code. Avoid drive-by refactors of unrel
 
 Before changing or removing anything, understand why it exists. This is Chesterton's Fence: if you see a fence across a road and don't understand why it's there, don't tear it down. First understand the reason, then decide if the reason still applies.
 
-```
+```text
 BEFORE SIMPLIFYING, ANSWER:
 - What is this code's responsibility?
 - What calls it? What does it call?
@@ -158,7 +158,7 @@ Scan for these patterns — each one is a concrete signal, not a vague smell:
 
 Make one simplification at a time. Run tests after each change. **Submit refactoring changes separately from feature or bug fix changes.** A PR that refactors and adds a feature is two PRs — split them.
 
-```
+```text
 FOR EACH SIMPLIFICATION:
 1. Make the change
 2. Run the test suite
@@ -174,7 +174,7 @@ Avoid batching multiple simplifications into a single untested change. If someth
 
 After all simplifications, step back and evaluate the whole:
 
-```
+```text
 COMPARE BEFORE AND AFTER:
 - Is the simplified version genuinely easier to understand?
 - Did you introduce any new patterns inconsistent with the codebase?

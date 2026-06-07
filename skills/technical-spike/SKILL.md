@@ -22,7 +22,7 @@ A "Spike" is a time-boxed, experimental coding session to validate technical fea
 
 A spike follows a tight, risk-reducing loop:
 
-```
+```text
 DEFINE GOAL ──→ EXPERIMENT ──→ RUN & EVALUATE ──→ DOCUMENT & CLEAN UP
      │              │                │                   │
      ▼              ▼                ▼                   ▼
@@ -31,20 +31,26 @@ DEFINE GOAL ──→ EXPERIMENT ──→ RUN & EVALUATE ──→ DOCUMENT & C
 ```
 
 ### Step 1: Define Goal and Timebox
+
 Define exactly what question the spike needs to answer (e.g., "Can we fetch data from API X and serialize it using Zod?"). Keep the scope minimal and the timebox tight (e.g., 15-30 minutes).
 
 ### Step 2: Implement Sandbox Code
-Write draft code to test the goal. 
+
+Write draft code to test the goal.
+
 - Prioritize speed and learning over code quality.
 - Ignore linters, test requirements, or formatting rules.
 - Do not make load-bearing changes to existing production files.
 
 ### Step 3: Run and Observe
+
 Execute the spike code and capture the output:
+
 - Monitor logs, console errors, and database changes.
 - Verify performance or memory usage if that is the goal.
 
 ### Step 4: Document Findings and Discard Code
+
 Save your findings (lessons learned, configuration gotchas, successful code snippets) in `SPIKE_FINDINGS.md` in the project root (or under the `docs/` folder as `docs/SPIKE_FINDINGS.md`, or a descriptive name under `docs/spikes/` if conducting multiple spikes).
 **Critically: Discard all spike code changes.** Do not commit draft spike code directly to production; rewrite the solution cleanly in the subsequent `/build` phase.
 
@@ -65,9 +71,11 @@ Save your findings (lessons learned, configuration gotchas, successful code snip
   ```
 
 ## Next Steps
+
 - Incorporate configuration X into the `/spec` and `/plan`.
 - Re-implement the working snippet cleanly in the `/build` phase.
-```
+
+```text
 
 ## Common Rationalizations
 

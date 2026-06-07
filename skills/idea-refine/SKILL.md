@@ -9,9 +9,9 @@ Refines raw ideas into sharp, actionable concepts worth building through structu
 
 ## How It Works
 
-1.  **Understand & Expand (Divergent):** Restate the idea, ask sharpening questions, and generate variations.
-2.  **Evaluate & Converge:** Cluster ideas, stress-test them, and surface hidden assumptions.
-3.  **Sharpen & Ship:** Produce a concrete markdown one-pager moving work forward.
+1. **Understand & Expand (Divergent):** Restate the idea, ask sharpening questions, and generate variations.
+2. **Evaluate & Converge:** Cluster ideas, stress-test them, and surface hidden assumptions.
+3. **Sharpen & Ship:** Produce a concrete markdown one-pager moving work forward.
 
 ## Usage
 
@@ -23,6 +23,7 @@ bash skills/idea-refine/scripts/idea-refine.sh
 ```
 
 **Trigger Phrases:**
+
 - "Help me refine this idea"
 - "Ideate on [concept]"
 - "Stress-test my plan"
@@ -30,6 +31,7 @@ bash skills/idea-refine/scripts/idea-refine.sh
 ## Output
 
 The final output is a markdown one-pager saved to `docs/ideas/[idea-name].md` (after user confirmation), containing:
+
 - Problem Statement
 - Recommended Direction
 - Key Assumptions

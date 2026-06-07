@@ -36,7 +36,7 @@ Before writing any code, operate in read-only mode:
 
 Map what depends on what:
 
-```
+```text
 Database schema
     │
     ├── API models/types
@@ -59,7 +59,8 @@ Implementation order follows the dependency graph bottom-up: build foundations f
 Instead of building all the database, then all the API, then all the UI — build one complete feature path at a time:
 
 **Bad (horizontal slicing):**
-```
+
+```text
 Task 1: Build entire database schema
 Task 2: Build all API endpoints
 Task 3: Build all UI components
@@ -67,7 +68,8 @@ Task 4: Connect everything
 ```
 
 **Good (vertical slicing):**
-```
+
+```text
 Task 1: User can create an account (schema + API + UI for registration)
 Task 2: User can log in (auth schema + API + UI for login)
 Task 3: User can create a task (task schema + API + UI for creation)
@@ -135,6 +137,7 @@ Add explicit checkpoints:
 If a task is L or larger, it should be broken into smaller tasks. An agent performs best on S and M tasks.
 
 **When to break a task down further:**
+
 - It would take more than one focused session (roughly 2+ hours of agent work)
 - You cannot describe the acceptance criteria in 3 or fewer bullet points
 - It touches two or more independent subsystems (e.g., auth and billing)

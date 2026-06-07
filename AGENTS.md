@@ -37,15 +37,17 @@ If a future host needs its own metadata, add it as a sibling (e.g. `.cursor-plug
 
 ### Directory Structure
 
+```text
 ```
-```
+
 skills/
-  {skill-name}/           # kebab-case directory name
-    SKILL.md              # Required: skill definition
-    scripts/              # Required: executable scripts
+  {skill-name}/ # kebab-case directory name
+    SKILL.md # Required: skill definition
+    scripts/ # Required: executable scripts
       {script-name}.sh    # Bash scripts (preferred)
   {skill-name}.zip        # Required: packaged for distribution
-```
+
+```text
 
 ### Naming Conventions
 
@@ -81,6 +83,7 @@ bash skills/{skill-name}/scripts/{script}.sh [args]
 ```
 
 **Arguments:**
+
 - `arg1` - Description (defaults to X)
 
 **Examples:**
@@ -97,7 +100,8 @@ bash skills/{skill-name}/scripts/{script}.sh [args]
 ## Troubleshooting
 
 {Common issues and solutions, especially network/permissions errors}
-```
+
+```text
 
 ### Best Practices for Context Efficiency
 

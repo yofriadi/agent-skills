@@ -23,6 +23,7 @@ The user (or a slash command) is the orchestrator. **Personas do not call other 
 ## When to use each
 
 ### Direct persona invocation
+
 Pick this when you want one perspective on the current change and the user is in the loop.
 
 - "Review this PR" → invoke `code-reviewer` directly
@@ -30,12 +31,14 @@ Pick this when you want one perspective on the current change and the user is in
 - "What tests are missing for the checkout flow?" → invoke `test-engineer` directly
 
 ### Slash command (single persona behind it)
+
 Pick this when there's a repeatable workflow you'd otherwise re-explain every time.
 
 - `/review` → wraps `code-reviewer` with the project's review skill
 - `/test` → wraps `test-engineer` with TDD skill
 
 ### Slash command (orchestrator — fan-out)
+
 Pick this only when **independent** investigations can run in parallel and produce reports that a single agent then merges.
 
 - `/ship` → fans out to `code-reviewer` + `security-auditor` + `test-engineer` in parallel, then synthesizes their reports into a go/no-go decision
@@ -44,7 +47,7 @@ This is the only orchestration pattern this repo endorses. See [references/orche
 
 ## Decision matrix
 
-```
+```text
 Is the work a single perspective on a single artifact?
 ├── Yes → Direct persona invocation
 └── No  → Are the sub-tasks independent (no shared mutable state, no ordering)?
@@ -56,7 +59,7 @@ Is the work a single perspective on a single artifact?
 
 `/ship` is the canonical fan-out orchestrator in this repo:
 
-```
+```text
 /ship
   ├── (parallel) code-reviewer    → review report
   ├── (parallel) security-auditor → audit report
@@ -68,6 +71,7 @@ Is the work a single perspective on a single artifact?
 ```
 
 Why this works:
+
 - Each sub-agent operates on the same diff but produces a **different perspective**
 - They have no dependencies on each other → genuine parallelism, real wall-clock savings
 - Each runs in a fresh context window → main session stays uncluttered
@@ -77,7 +81,7 @@ Why this works:
 
 A `meta-orchestrator` persona whose job is "decide which other persona to call":
 
-```
+```text
 /work-on-pr → meta-orchestrator
                   ↓ (decides "this needs a review")
               code-reviewer
@@ -88,6 +92,7 @@ A `meta-orchestrator` persona whose job is "decide which other persona to call":
 ```
 
 Why this fails:
+
 - Pure routing layer with no domain value
 - Adds two paraphrasing hops → information loss + 2× token cost
 - The user already knows they want a review; let them call `/review` directly
