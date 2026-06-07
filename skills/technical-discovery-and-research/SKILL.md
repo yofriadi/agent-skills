@@ -33,6 +33,7 @@ Identify the research type first — it determines which sub-steps matter most:
 | `refactor` | "Clean up Z" | Step 2 (call graph) + migration surface |
 | `port` | "Rewrite X in Y" | Source-system audit + translation table + parity contract (see worked example: [`examples/port-pi.md`](examples/port-pi.md)) |
 | `library-survey` | "Pick a library" | Step 3 + ecosystem maturity + license |
+| `follow-on` | "Ground the next decision after prior research" | Narrow scope + explicit parent-research linkage + decision-oriented output |
 | `greenfield` | "Build X from scratch" | Reference-architecture discovery |
 
 ## Scoping Questions
@@ -45,6 +46,8 @@ Before searching, confirm with the user:
 5. **Cross-cutting concerns in play** — security boundaries, observability, accessibility, i18n, multi-tenancy
 6. **Out of scope** — what this research will *not* answer (prevent sprawl)
 7. **Known unknowns** — what the user already knows is uncertain
+8. **Parent research / prior decision** — if this is a follow-on stream, which earlier `RESEARCH.md` or `docs/research/*.md` it extends
+9. **Decision this stream must ground** — the concrete next move this research should unblock (for example: "pick the first provider to integrate in the Rust port")
 
 Skip questions that are obviously answered. Capture answers in the deliverable.
 
@@ -112,12 +115,13 @@ If the task requires integrating a new library or external service, follow the `
 
 ### Step 4: Compile Discovery Findings
 
-Save the findings in `RESEARCH.md` in the project root, or `docs/research/<topic>.md` when running multiple parallel research streams. The report must be grounded in observed codebase facts, not assumptions.
+Save the findings in `RESEARCH.md` in the project root, or `docs/research/<topic>.md` when running multiple, parallel, or follow-on research streams. The report must be grounded in observed codebase facts, not assumptions.
+
+If this research extends an earlier stream, keep the earlier document immutable and add a new sibling document that links back to it. Follow-on research is not an append-only dumping ground; it must answer one narrower decision cleanly.
 
 Select the template based on the **Research Type Taxonomy**:
 - **Discovery Template (Default)**: For `feature`, simple `modification`, and routine `refactor`. Focuses on quick codebase mapping, blast radius, and identifying unknowns.
-- **Comprehensive Template**: For `port`, `integration`, `library-survey`, `greenfield`, high-risk/stateful `modification`, and large/architectural `refactor`. Focuses on risk mitigation, translation, external contracts, and contract stability.
-  - *Include only the sections that apply to the selected research type.*
+- **Comprehensive Template**: For `port`, `integration`, `library-survey`, `follow-on`, `greenfield`, high-risk/stateful `modification`, and large/architectural `refactor`. Focuses on risk mitigation, translation, external contracts, and contract stability.
 
 ---
 
@@ -154,21 +158,22 @@ Select the template based on the **Research Type Taxonomy**:
 
 ---
 
-#### Template B: Comprehensive (For port, integration, library-survey, greenfield, stateful modification, architectural refactor)
+#### Template B: Comprehensive (For port, integration, library-survey, follow-on, greenfield, stateful modification, architectural refactor)
 
 ```markdown
 # Technical Discovery: [Feature/Task Name]
 
-**Research type:** [integration | port | library-survey | greenfield | modification (stateful/high-risk) | refactor (architectural)]
+**Research type:** [integration | port | library-survey | follow-on | greenfield | modification (stateful/high-risk) | refactor (architectural)]
 **Date:** [ISO date]
 **Researcher:** [agent or human]
 
 ## 1. Scope & Boundaries
+- **Parent research:** [prior `RESEARCH.md` or `docs/research/*.md`, or `none`]
+- **Decision this stream grounds:** [the concrete choice this report is meant to unblock]
 - **In scope:** [what this research will answer]
 - **Out of scope:** [what it will not answer]
 - **Non-functional requirements:** [performance, platform, license, compliance]
 - **Cross-cutting concerns in play:** [security, observability, a11y, i18n, multi-tenancy]
-
 ## 2. Grounded Codebase Context
 - **Relevant files & anchors (`path:line`):**
   - `path/to/file.ts:12`
@@ -239,10 +244,11 @@ Before declaring discovery complete, confirm:
 - [ ] Findings saved to `RESEARCH.md` or `docs/research/<topic>.md`
 - [ ] Recommended next step (`/spike` or `/plan`) explicitly stated
 
-### 2. Integration & Survey Gates (For integrations / library surveys)
-- [ ] External API structures, environment variables, authentication, and rate limits verified
-- [ ] Pinned library versions and concrete usage examples from public code identified and referenced
-- [ ] Every dependency target license checked against target distribution constraints (no license contamination)
+### 2. Integration, Survey, and Follow-On Gates (For integrations / library surveys / follow-on streams)
+- [ ] External API structures, environment variables, authentication, and rate limits verified when relevant to the decision
+- [ ] Pinned library versions identified when the stream introduces dependency candidates; concrete usage examples from public code identified and referenced when available
+- [ ] Parent research and the specific decision this stream grounds are explicitly linked when this is a follow-on stream
+- [ ] Every dependency target license checked against target distribution constraints (no license contamination) — only when the stream introduces or replaces dependency candidates
 
 ### 3. Port & High-Risk Change Gates (For ports, stateful modifications, large refactors)
 - [ ] Behavioral-preservation contract documented (definition of preserved behavior and invariants)
@@ -260,4 +266,4 @@ Before declaring discovery complete, confirm:
 
 ## Examples
 
-For a worked instance of `port` research showing the full template filled out — including translation table, thread-safety boundary mapping, license-contamination check, behavioral contract, phasing, and risk register — see `examples/port-pi.md`.
+For a worked instance of `port` research showing the full template filled out — including translation table, thread-safety boundary mapping, license-contamination check, behavioral contract, phasing, and risk register — see `examples/port-pi.md`. For a worked follow-on stream that narrows a prior port into a first-provider integration decision, see `examples/follow-on-codex-oauth.md`.
