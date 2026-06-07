@@ -39,7 +39,7 @@ Structure context from most persistent to most transient:
 
 Create a rules file that persists across sessions. This is the highest-leverage context you can provide.
 
-**CLAUDE.md** (for Claude Code):
+**AGENTS.md**:
 ```markdown
 # Project: [Name]
 
@@ -72,11 +72,8 @@ Create a rules file that persists across sessions. This is the highest-leverage 
 ```
 
 **Equivalent files for other tools:**
-- `.cursorrules` or `.cursor/rules/*.md` (Cursor)
 - `.windsurfrules` (Windsurf)
-- `.github/copilot-instructions.md` (GitHub Copilot)
-- `AGENTS.md` (OpenAI Codex)
-
+- `AGENTS.md` (Antigravity and other agents)
 ### Level 2: Specs and Architecture
 
 Load the relevant spec section when starting a feature. Don't load the entire spec if only one section applies.

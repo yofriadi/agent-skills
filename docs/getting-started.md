@@ -1,6 +1,6 @@
 # Getting Started with agent-skills
 
-agent-skills works with any AI coding agent that accepts Markdown instructions. This guide covers the universal approach. For tool-specific setup, see the dedicated guides.
+agent-skills works with any AI coding agent that accepts Markdown instructions. This guide covers the universal approach.
 
 ## How Skills Work
 
@@ -31,7 +31,7 @@ Copy the relevant `SKILL.md` content into your agent's system prompt, rules file
 
 **System prompt:** Paste the skill content at the start of the session.
 
-**Rules file:** Add skill content to your project's rules file (CLAUDE.md, .cursorrules, etc.).
+**Rules file:** Add skill content to your project's rules file (AGENTS.md, etc.).
 
 **Conversation:** Reference the skill when giving instructions: "Follow the test-driven-development process for this change."
 
@@ -101,15 +101,18 @@ Load an agent definition when you need specialized review. For example, ask your
 
 ## Using Commands
 
-The `.claude/commands/` directory contains slash commands for Claude Code:
+The `agents/commands/` directory contains slash commands for agents:
 
 | Command | Skill Invoked |
 |---------|---------------|
+| `/research` | technical-discovery-and-research |
+| `/spike` | technical-spike |
 | `/spec` | spec-driven-development |
 | `/plan` | planning-and-task-breakdown |
-| `/build` | incremental-implementation + test-driven-development |
+| `/build` | incremental-implementation |
 | `/test` | test-driven-development |
 | `/review` | code-review-and-quality |
+| `/refactor` | code-simplification |
 | `/ship` | shipping-and-launch |
 
 ## Using References

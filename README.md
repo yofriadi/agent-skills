@@ -10,16 +10,18 @@ Skills encode the workflows, quality gates, and best practices that senior engin
 
 ## Commands
 
-7 slash commands that map to the development lifecycle. Each one activates the right skills automatically.
+9 slash commands that map to the development lifecycle. Each one activates the right skills automatically.
 
 | What you're doing | Command | Key principle |
 |-------------------|---------|---------------|
+| Research codebase & docs | `/research` | Grounding over guessing |
+| Experiment with solutions | `/spike` | Prototype to learn |
 | Define what to build | `/spec` | Spec before code |
 | Plan how to build it | `/plan` | Small, atomic tasks |
 | Build incrementally | `/build` | One slice at a time |
 | Prove it works | `/test` | Tests are proof |
 | Review before merge | `/review` | Improve code health |
-| Simplify the code | `/code-simplify` | Clarity over cleverness |
+| Refactor the code | `/refactor` | Clarity over cleverness |
 | Ship to production | `/ship` | Faster is safer |
 
 Skills also activate automatically based on what you're doing — designing an API triggers `api-and-interface-design`, building UI triggers `frontend-ui-engineering`, and so on.
@@ -28,92 +30,31 @@ Skills also activate automatically based on what you're doing — designing an A
 
 ## Quick Start
 
-<details>
-<summary><b>Claude Code (recommended)</b></summary>
+### Option 1: Native Skills (Auto-Discovery)
 
-**Marketplace install:**
+If your agent supports native skill discovery, point it to the `skills/` directory at the root of the workspace.
 
+**Install from repository:**
+```bash
+antigravity skills install https://github.com/addyosmani/agent-skills.git --path skills
 ```
-/plugin marketplace add addyosmani/agent-skills
-/plugin install agent-skills@addy-agent-skills
+
+**Install from local clone:**
+```bash
+antigravity skills install ./agent-skills/skills/
 ```
 
-> **SSH errors?** The marketplace clones repos via SSH. If you don't have SSH keys set up on GitHub, either [add your SSH key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) or use the full HTTPS URL to force the HTTPS cloning:
-> ```bash
-> /plugin marketplace add https://github.com/addyosmani/agent-skills.git
-> /plugin install agent-skills@addy-agent-skills
-> ```
+### Option 2: AGENTS.md (Persistent Context)
 
-**Local / development:**
+For any agent that reads a root instructions file, copy or link the skills you want directly to your project's `AGENTS.md`:
 
 ```bash
-git clone https://github.com/addyosmani/agent-skills.git
-claude --plugin-dir /path/to/agent-skills
+cat skills/incremental-implementation/SKILL.md > AGENTS.md
+echo -e "\n---\n" >> AGENTS.md
+cat skills/code-review-and-quality/SKILL.md >> AGENTS.md
 ```
 
-</details>
-
-<details>
-<summary><b>Cursor</b></summary>
-
-Copy any `SKILL.md` into `.cursor/rules/`, or reference the full `skills/` directory. See [docs/cursor-setup.md](docs/cursor-setup.md).
-
-</details>
-
-<details>
-<summary><b>Gemini CLI</b></summary>
-
-Install as native skills for auto-discovery, or add to `GEMINI.md` for persistent context. See [docs/gemini-cli-setup.md](docs/gemini-cli-setup.md).
-
-**Install from the repo:**
-
-```bash
-gemini skills install https://github.com/addyosmani/agent-skills.git --path skills
-```
-
-**Install from a local clone:**
-
-```bash
-gemini skills install ./agent-skills/skills/
-```
-
-</details>
-
-<details>
-<summary><b>Windsurf</b></summary>
-
-Add skill contents to your Windsurf rules configuration. See [docs/windsurf-setup.md](docs/windsurf-setup.md).
-
-</details>
-
-<details>
-<summary><b>OpenCode</b></summary>
-
-Uses agent-driven skill execution via AGENTS.md and the `skill` tool.
-
-See [docs/opencode-setup.md](docs/opencode-setup.md).
-
-</details>
-
-<details>
-<summary><b>GitHub Copilot</b></summary>
-
-Use agent definitions from `agents/` as Copilot personas and skill content in `.github/copilot-instructions.md`. See [docs/copilot-setup.md](docs/copilot-setup.md).
-
-</details>
-
-<details>
-  <summary><b>Kiro IDE & CLI </b></summary>
-  Skills for Kiro reside under ".kiro/skills/" and can be stored under Project or Global level. Kiro also supports Agents.md. See Kiro docs at https://kiro.dev/docs/skills/
-</details>
-
-<details>
-<summary><b>Codex / Other Agents</b></summary>
-
-Skills are plain Markdown - they work with any agent that accepts system prompts or instruction files. See [docs/getting-started.md](docs/getting-started.md).
-
-</details>
-
+For more details, see [docs/getting-started.md](docs/getting-started.md).
 
 
 ---
@@ -132,6 +73,8 @@ The commands above are entry points. The pack includes 23 skills total — 22 li
 
 | Skill | What It Does | Use When |
 |-------|-------------|----------|
+| [technical-discovery-and-research](skills/technical-discovery-and-research/SKILL.md) | Deep codebase exploration, documentation analysis, and constraint mapping | Grounding understanding of existing codebases, external APIs, and dependencies |
+| [technical-spike](skills/technical-spike/SKILL.md) | Time-boxed, experimental coding to validate technical feasibility, test APIs, or explore architectural options | Technical risks or unknowns are high |
 | [interview-me](skills/interview-me/SKILL.md) | One-question-at-a-time interview that extracts what the user actually wants instead of what they think they should want, until ~95% confidence | The ask is underspecified, or the user invokes "interview me" / "grill me" |
 | [idea-refine](skills/idea-refine/SKILL.md) | Structured divergent/convergent thinking to turn vague ideas into concrete proposals | You have a rough concept that needs exploration |
 | [spec-driven-development](skills/spec-driven-development/SKILL.md) | Write a PRD covering objectives, commands, structure, code style, testing, and boundaries before any code | Starting a new project, feature, or significant change |
@@ -219,7 +162,7 @@ Every skill follows a consistent anatomy:
 │  │ name: lowercase-hyphen-name               │  │
 │  │ description: Guides agents through [task].│  │
 │  │              Use when…                    │  │
-│  └───────────────────────────────────────────┘  │                                                                                                
+│  └───────────────────────────────────────────┘  │
 │  Overview         → What this skill does        │
 │  When to Use      → Triggering conditions       │
 │  Process          → Step-by-step workflow       │
@@ -242,35 +185,36 @@ Every skill follows a consistent anatomy:
 
 ```
 agent-skills/
-├── skills/                            # 23 skills (22 lifecycle + 1 meta)
-│   ├── interview-me/                  #   Define
-│   ├── idea-refine/                   #   Define
-│   ├── spec-driven-development/       #   Define
-│   ├── planning-and-task-breakdown/   #   Plan
-│   ├── incremental-implementation/    #   Build
-│   ├── context-engineering/           #   Build
-│   ├── source-driven-development/     #   Build
-│   ├── doubt-driven-development/      #   Build
-│   ├── frontend-ui-engineering/       #   Build
-│   ├── test-driven-development/       #   Build
-│   ├── api-and-interface-design/      #   Build
-│   ├── browser-testing-with-devtools/ #   Verify
-│   ├── debugging-and-error-recovery/  #   Verify
-│   ├── code-review-and-quality/       #   Review
-│   ├── code-simplification/          #   Review
-│   ├── security-and-hardening/        #   Review
-│   ├── performance-optimization/      #   Review
-│   ├── git-workflow-and-versioning/   #   Ship
-│   ├── ci-cd-and-automation/          #   Ship
-│   ├── deprecation-and-migration/     #   Ship
-│   ├── documentation-and-adrs/        #   Ship
-│   ├── shipping-and-launch/           #   Ship
-│   └── using-agent-skills/            #   Meta: how to use this pack
-├── agents/                            # 3 specialist personas
+├── .agents/                           # Antigravity CLI workspace directory
+│   └── skills/                        # 25 skills (24 lifecycle + 1 meta)
+│       ├── technical-discovery-and-research/ # Define
+│       ├── technical-spike/               #   Define
+│       ├── interview-me/                  #   Define
+│       ├── idea-refine/                   #   Define
+│       ├── spec-driven-development/       #   Define
+│       ├── planning-and-task-breakdown/   #   Plan
+│       ├── incremental-implementation/    #   Build
+│       ├── context-engineering/           #   Build
+│       ├── source-driven-development/     #   Build
+│       ├── doubt-driven-development/      #   Build
+│       ├── frontend-ui-engineering/       #   Build
+│       ├── test-driven-development/       #   Build
+│       ├── api-and-interface-design/      #   Build
+│       ├── browser-testing-with-devtools/ #   Verify
+│       ├── debugging-and-error-recovery/  #   Verify
+│       ├── code-review-and-quality/       #   Review
+│       ├── code-simplification/          #   Review
+│       ├── security-and-hardening/        #   Review
+│       ├── performance-optimization/      #   Review
+│       ├── git-workflow-and-versioning/   #   Ship
+│       ├── ci-cd-and-automation/          #   Ship
+│       ├── deprecation-and-migration/     #   Ship
+│       ├── documentation-and-adrs/        #   Ship
+│       ├── shipping-and-launch/           #   Ship
+│       └── using-agent-skills/            #   Meta: how to use this pack
+├── agents/                            # 3 specialist personas & 9 slash commands
+│   └── commands/                      # 9 slash commands (Antigravity CLI)
 ├── references/                        # 4 supplementary checklists
-├── hooks/                             # Session lifecycle hooks
-├── .claude/commands/                  # 7 slash commands (Claude Code)
-├── .gemini/commands/                  # 7 slash commands (Gemini CLI)
 └── docs/                              # Setup guides per tool
 ```
 
