@@ -2,17 +2,25 @@
 description: Start spec-driven development — write a structured specification before writing code
 ---
 
-Read and follow the `skill://spec-driven-development` skill.
+Read and strictly follow the `skill://spec-driven-development` skill for this task.
 
-Begin by understanding what the user wants to build. Ask clarifying questions about:
+Start by reading the existing discovery artifacts that define the surface area for this work — relevant `docs/research/*.md`, `docs/spikes/*/SPIKE_FINDINGS.md`, and any prior spec if one exists. Treat them as source material, not optional background.
 
-1. The objective and target users
-2. Core features and acceptance criteria
-3. Tech stack preferences and constraints
-4. Known boundaries (what to always do, ask first about, and never do)
+Before asking the human anything, extract and list:
 
-Then generate a structured spec covering all six core areas: objective, commands, project structure, code style, testing strategy, and boundaries.
+1. Grounded facts already established by research/spikes
+2. Assumptions you still need to make to move forward
+3. Open questions that materially affect scope, architecture, or verification
 
-Save the spec as SPEC.md in the project root and confirm with the user before proceeding.
+Ask only delta questions for unresolved items. Do not restart discovery from scratch when prior phases already answered it.
+
+Then generate a structured spec that:
+
+1. Covers the six core areas: objective, commands, project structure, code style, testing strategy, and boundaries
+2. Adds explicit **In Scope** and **Out of Scope** sections when the work is phased, architectural, or intentionally partial
+3. Includes concrete **Success Criteria** and **Open Questions**
+4. Cites the research/spike artifacts that grounded major scope or design decisions
+
+Save the spec as `SPEC.md` in the project root, stop after the spec, and ask for human approval before `/plan`, `/tasks`, or implementation.
 
 $@

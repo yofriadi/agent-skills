@@ -48,6 +48,8 @@ ASSUMPTIONS I'M MAKING:
 
 Don't silently fill in ambiguous requirements. The spec's entire purpose is to surface misunderstandings *before* code gets written — assumptions are the most dangerous form of misunderstanding.
 
+**When prior discovery exists, consume it first.** If the repository already has research notes, spikes, ADRs, or earlier specs, read them before drafting the spec. Treat them as grounded inputs to synthesize, not as optional context to ignore. Only ask the human for the unresolved delta after you've extracted established facts, assumptions, and open questions from those artifacts.
+
 **Write a spec document covering these six core areas:**
 
 1. **Objective** — What are we building and why? Who is the user? What does success look like?
@@ -61,6 +63,8 @@ Don't silently fill in ambiguous requirements. The spec's entire purpose is to s
    Dev: npm run dev
    ```
 
+When prior phases already verified commands or constraints, copy them forward and cite the source artifact instead of re-inventing them.
+
 3. **Project Structure** — Where source code lives, where tests go, where docs belong.
 
    ```text
@@ -71,6 +75,8 @@ Don't silently fill in ambiguous requirements. The spec's entire purpose is to s
    e2e/           → End-to-end tests
    docs/          → Documentation
    ```
+
+   For phased or architectural work, add explicit **In Scope** and **Out of Scope** subsections so later `/plan` and implementation phases do not silently expand the surface area.
 
 4. **Code Style** — One real code snippet showing your style beats three paragraphs describing it. Include naming conventions, formatting rules, and examples of good output.
 
@@ -88,6 +94,20 @@ Don't silently fill in ambiguous requirements. The spec's entire purpose is to s
 
 ## Objective
 [What we're building and why. User stories or acceptance criteria.]
+
+## Grounding
+- Research: [docs/research/...]
+- Spikes: [docs/spikes/...]
+- Prior specs/ADRs: [...]
+
+## Assumptions
+- [...]
+
+## In Scope
+- [...]
+
+## Out of Scope
+- [...]
 
 ## Tech Stack
 [Framework, language, key dependencies with versions]
@@ -130,6 +150,7 @@ REFRAMED SUCCESS CRITERIA:
 
 This lets you loop, retry, and problem-solve toward a clear goal rather than guessing what "faster" means.
 
+
 ### Phase 2: Plan
 
 With the validated spec, generate a technical implementation plan:
@@ -160,11 +181,9 @@ Break the plan into discrete, implementable tasks:
   - Verify: [How to confirm — test command, build, manual check]
   - Files: [Which files will be touched]
 ```
-
 ### Phase 4: Implement
-
+ 
 Execute tasks one at a time following `skills/incremental-implementation/SKILL.md` (`incremental-implementation`) and `skills/test-driven-development/SKILL.md` (`test-driven-development`). Use `skills/context-engineering/SKILL.md` (`context-engineering`) to load the right spec sections and source files at each step rather than flooding the agent with the entire spec.
-
 ## Keeping the Spec Alive
 
 The spec is a living document, not a one-time artifact:
